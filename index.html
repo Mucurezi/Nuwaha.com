@@ -14,7 +14,7 @@
                 <h2>Muteesa II Memorial School</h2>
                 <p>Mutundwe</p>
             </div>
-            <button class="menu-toggle" id="menuToggle">
+            <button class="menu-toggle" id="menuToggle" onclick="toggleMenu()">
                 <i class="fas fa-bars"></i>
             </button>
             <ul class="nav-links" id="navLinks">
@@ -28,6 +28,38 @@
             </ul>
         </div>
     </nav>
+    
+    <script>
+    // Inline mobile menu script - guaranteed to work
+    function toggleMenu() {
+        const navLinks = document.getElementById('navLinks');
+        const menuToggle = document.getElementById('menuToggle');
+        const icon = menuToggle.querySelector('i');
+        
+        navLinks.classList.toggle('active');
+        
+        if (navLinks.classList.contains('active')) {
+            icon.classList.remove('fa-bars');
+            icon.classList.add('fa-times');
+        } else {
+            icon.classList.remove('fa-times');
+            icon.classList.add('fa-bars');
+        }
+    }
+    
+    // Close menu when clicking on links
+    document.addEventListener('DOMContentLoaded', function() {
+        const links = document.querySelectorAll('.nav-links a');
+        links.forEach(link => {
+            link.addEventListener('click', function() {
+                document.getElementById('navLinks').classList.remove('active');
+                const icon = document.querySelector('#menuToggle i');
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            });
+        });
+    });
+    </script>
 
     <section class="hero">
         <div class="hero-content">

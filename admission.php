@@ -24,7 +24,7 @@ if (!isset($_SESSION['user_id'])) {
                 <h2>Muteesa II Memorial School</h2>
                 <p>Mutundwe</p>
             </div>
-            <button class="menu-toggle" id="menuToggle">
+            <button class="menu-toggle" id="menuToggle" onclick="toggleMenu()">
                 <i class="fas fa-bars"></i>
             </button>
             <ul class="nav-links" id="navLinks">

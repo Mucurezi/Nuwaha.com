@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mobile Menu Test</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Additional test styles */
+        .test-info {
+            padding: 20px;
+            background: #f0f0f0;
+            margin: 20px;
+            border-radius: 5px;
+        }
+        .test-info h2 {
+            color: #1a5f3f;
+        }
+        .status {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+        .status.success {
+            background: #d4edda;
+            color: #155724;
+        }
+        .status.info {
+            background: #d1ecf1;
+            color: #0c5460;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">
+                <h2>Muteesa II Memorial School</h2>
+                <p>Mobile Menu Test</p>
+            </div>
+            <button class="menu-toggle" id="menuToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="admission.php">Admission</a></li>
+                <li><a href="gallery.html">Gallery</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="register.php">Register</a></li>
+                <li><a href="login.php" class="login-btn">Login</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="test-info">
+        <h2>📱 Mobile Menu Test Page</h2>
+        
+        <div class="status success">
+            ✅ Menu toggle button is present
+        </div>
+        
+        <div class="status info">
+            📋 <strong>How to test:</strong>
+            <ol>
+                <li>Resize your browser window to less than 968px width (or use mobile device)</li>
+                <li>You should see the hamburger icon (☰) in the navigation bar</li>
+                <li>Click the hamburger icon</li>
+                <li>The menu should slide in from the left showing all navigation links</li>
+                <li>The icon should change to X (✕)</li>
+                <li>Click any link or click outside to close the menu</li>
+            </ol>
+        </div>
+        
+        <div class="status info">
+            🔍 <strong>Current Status:</strong>
+            <p id="menuStatus">Checking...</p>
+            <p id="screenSize">Screen width: <span id="width"></span>px</p>
+            <p id="menuState">Menu state: <span id="state">Closed</span></p>
+        </div>
+        
+        <button onclick="testMenu()" style="padding: 10px 20px; background: #1a5f3f; color: white; border: none; border-radius: 5px; cursor: pointer; margin-top: 10px;">
+            🧪 Test Menu Toggle
+        </button>
+    </div>
+
+    <script src="js/script.js"></script>
+    <script>
+        // Additional test script
+        function updateStatus() {
+            const width = window.innerWidth;
+            const menuToggle = document.getElementById('menuToggle');
+            const navLinks = document.getElementById('navLinks');
+            
+            document.getElementById('width').textContent = width;
+            
+            if (menuToggle && navLinks) {
+                document.getElementById('menuStatus').innerHTML = '<span style="color: green;">✓ Menu elements found</span>';
+                
+                // Check if menu is active
+                if (navLinks.classList.contains('active')) {
+                    document.getElementById('state').textContent = 'Open';
+                    document.getElementById('state').style.color = 'green';
+                } else {
+                    document.getElementById('state').textContent = 'Closed';
+                    document.getElementById('state').style.color = 'red';
+                }
+            } else {
+                document.getElementById('menuStatus').innerHTML = '<span style="color: red;">✗ Menu elements not found</span>';
+            }
+        }
+        
+        function testMenu() {
+            const menuToggle = document.getElementById('menuToggle');
+            if (menuToggle) {
+                menuToggle.click();
+                setTimeout(updateStatus, 100);
+            } else {
+                alert('Menu toggle button not found!');
+            }
+        }
+        
+        // Update status on load and resize
+        window.addEventListener('load', updateStatus);
+        window.addEventListener('resize', updateStatus);
+        
+        // Monitor menu state changes
+        const observer = new MutationObserver(updateStatus);
+        const navLinks = document.getElementById('navLinks');
+        if (navLinks) {
+            observer.observe(navLinks, { attributes: true, attributeFilter: ['class'] });
+        }
+    </script>
+</body>
+</html>
