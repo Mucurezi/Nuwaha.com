@@ -13,6 +13,13 @@ if (!isset($_SESSION['user_id']) || $_SESSION['user_role'] !== 'admin') {
 
 require_once '../../config/database.php';
 
+// Get database connection first
+try {
+    $conn = getDBConnection();
+} catch (Exception $e) {
+    die("Database connection failed: " . $e->getMessage());
+}
+
 // Get filter parameters
 $status_filter = $_GET['status'] ?? 'all';
 $search = $_GET['search'] ?? '';
@@ -39,7 +46,6 @@ if ($class_filter !== 'all') {
 $query .= " ORDER BY a.application_date DESC";
 
 try {
-    $conn = getDBConnection();
     $result = $conn->query($query);
     
     // Get counts for filters

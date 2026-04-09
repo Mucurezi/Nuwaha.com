@@ -1,0 +1,74 @@
+================================================================================
+NOTIFICATION CONFIGURATION - COPY AND PASTE
+================================================================================
+
+Open file: config/notification.php
+
+Find these lines and change them:
+
+--------------------------------------------------------------------------------
+BEFORE (Lines 8-11):
+--------------------------------------------------------------------------------
+define('SCHOOL_NAME', 'Muteesa II Memorial School');
+define('SCHOOL_EMAIL', 'info@muteesaschool.com');
+define('SCHOOL_PHONE', '+256-XXX-XXXXXX');
+define('HEADTEACHER_PHONE', '+256-XXX-XXXXXX');
+
+--------------------------------------------------------------------------------
+AFTER (Example - Use your real information):
+--------------------------------------------------------------------------------
+define('SCHOOL_NAME', 'Muteesa II Memorial School');
+define('SCHOOL_EMAIL', 'info@muteesaschool.ac.ug');
+define('SCHOOL_PHONE', '+256-700-123456');
+define('HEADTEACHER_PHONE', '+256-700-987654');
+
+
+--------------------------------------------------------------------------------
+BEFORE (Line 14):
+--------------------------------------------------------------------------------
+define('EMAIL_FROM', 'noreply@muteesaschool.com');
+
+--------------------------------------------------------------------------------
+AFTER (Example - Use your real email):
+--------------------------------------------------------------------------------
+define('EMAIL_FROM', 'admissions@muteesaschool.ac.ug');
+
+
+================================================================================
+FOR SMS (OPTIONAL)
+================================================================================
+
+If you want SMS notifications:
+
+1. Sign up at: https://africastalking.com
+2. Get your API Key from dashboard
+3. Change these lines:
+
+--------------------------------------------------------------------------------
+BEFORE (Lines 18-20):
+--------------------------------------------------------------------------------
+define('SMS_ENABLED', false);
+define('SMS_API_KEY', 'your_api_key_here');
+define('SMS_USERNAME', 'sandbox');
+
+--------------------------------------------------------------------------------
+AFTER (Example - Use your real API key):
+--------------------------------------------------------------------------------
+define('SMS_ENABLED', true);
+define('SMS_API_KEY', 'atsk_1234567890abcdef1234567890abcdef');
+define('SMS_USERNAME', 'muteesaschool');
+
+
+================================================================================
+SAVE FILE AND TEST
+================================================================================
+
+1. Save config/notification.php
+2. Login to admin panel
+3. Approve any application
+4. Check for success message
+5. Check logs/php_errors.log
+
+Done! ✅
+
+================================================================================

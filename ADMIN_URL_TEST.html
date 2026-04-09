@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel Access - Quick Links</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #2c5f2d 0%, #1e4620 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            max-width: 600px;
+            width: 100%;
+        }
+        h1 {
+            color: #2c5f2d;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        p {
+            color: #666;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        .link-box {
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            border-left: 4px solid #2c5f2d;
+        }
+        .link-box h3 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+        .link-box a {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #2c5f2d;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 10px;
+            transition: background 0.3s;
+        }
+        .link-box a:hover {
+            background: #1e4620;
+        }
+        .credentials {
+            background: #fff3cd;
+            padding: 20px;
+            border-radius: 5px;
+            border-left: 4px solid #ffc107;
+            margin-top: 20px;
+        }
+        .credentials h3 {
+            color: #856404;
+            margin-bottom: 10px;
+        }
+        .credentials p {
+            color: #856404;
+            margin: 5px 0;
+            text-align: left;
+        }
+        .credentials strong {
+            color: #000;
+        }
+        .note {
+            background: #d1ecf1;
+            padding: 15px;
+            border-radius: 5px;
+            border-left: 4px solid #17a2b8;
+            margin-top: 20px;
+            color: #0c5460;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔐 Admin Panel Access</h1>
+        <p>Click the link that works for your setup</p>
+        
+        <div class="link-box">
+            <h3>Option 1: Folder with space (mutunde parents)</h3>
+            <a href="admin/login.php" target="_blank">Open Admin Panel →</a>
+        </div>
+        
+        <div class="link-box">
+            <h3>Option 2: Direct URL with %20</h3>
+            <a href="http://localhost/mutunde%20parents/admin/login.php" target="_blank">Open Admin Panel →</a>
+        </div>
+        
+        <div class="link-box">
+            <h3>Option 3: URL with + sign</h3>
+            <a href="http://localhost/mutunde+parents/admin/login.php" target="_blank">Open Admin Panel →</a>
+        </div>
+        
+        <div class="credentials">
+            <h3>🔑 Login Credentials</h3>
+            <p><strong>Username:</strong> admin</p>
+            <p><strong>Password:</strong> Admin@123</p>
+        </div>
+        
+        <div class="note">
+            <strong>Note:</strong> If none of these work, check your folder name in C:\xampp\htdocs\ and use that exact name in the URL.
+        </div>
+    </div>
+</body>
+</html>

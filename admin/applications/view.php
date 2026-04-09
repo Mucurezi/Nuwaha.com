@@ -18,6 +18,7 @@ if (!$app_id) {
 }
 
 require_once '../../config/database.php';
+require_once '../../config/notification.php';
 
 // Handle status update
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
@@ -27,11 +28,57 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
     if (in_array($new_status, ['pending', 'approved', 'rejected'])) {
         try {
             $conn = getDBConnection();
+            
+            // Get application details before updating
+            $stmt = $conn->prepare("SELECT student_name, parent_name, email, phone, class_applying_for FROM admissions WHERE application_id = ?");
+            $stmt->bind_param("i", $app_id);
+            $stmt->execute();
+            $app_details = $stmt->get_result()->fetch_assoc();
+            $stmt->close();
+            
+            // Update status
             $stmt = $conn->prepare("UPDATE admissions SET status = ?, notes = ?, reviewed_by = ?, review_date = NOW() WHERE application_id = ?");
             $stmt->bind_param("ssii", $new_status, $notes, $_SESSION['user_id'], $app_id);
             
             if ($stmt->execute()) {
                 $success = "Application status updated to: " . ucfirst($new_status);
+                
+                // Send notifications
+                if ($new_status === 'approved' && $app_details) {
+                    $notification_results = sendAdmissionApprovalNotification(
+                        $app_details['parent_name'],
+                        $app_details['student_name'],
+                        $app_details['class_applying_for'],
+                        $app_details['email'],
+                        $app_details['phone']
+                    );
+                    
+                    if ($notification_results['email']) {
+                        $success .= " Email notification sent successfully.";
+                    } else {
+                        $success .= " (Email notification failed - check logs)";
+                    }
+                    
+                    if ($notification_results['sms']) {
+                        $success .= " SMS notification sent successfully.";
+                    }
+                    
+                } elseif ($new_status === 'rejected' && $app_details) {
+                    $notification_results = sendAdmissionRejectionNotification(
+                        $app_details['parent_name'],
+                        $app_details['student_name'],
+                        $app_details['class_applying_for'],
+                        $app_details['email'],
+                        $app_details['phone'],
+                        $notes
+                    );
+                    
+                    if ($notification_results['email']) {
+                        $success .= " Email notification sent successfully.";
+                    } else {
+                        $success .= " (Email notification failed - check logs)";
+                    }
+                }
             }
             
             $stmt->close();
